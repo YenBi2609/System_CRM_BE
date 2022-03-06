@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,17 @@ Route::post('create/tasks', [TaskController::class, 'store']);
 Route::put('update-task/{id}', [TaskController::class, 'update']);
 Route::delete('delete-task/{id}', [TaskController::class, 'destroy']);
 
+// Client 
+Route::get('clients', [ClientController::class, 'index']);
+Route::post('create/clients', [ClientController::class, 'store']);
+Route::put('update-client/{id}', [ClientController::class, 'update']);
+Route::delete('delete-client/{id}', [ClientController::class, 'destroy']);
+
+// Product 
+Route::get('products', [ProductController::class, 'index']);
+Route::post('create/products', [ProductController::class, 'store']);
+Route::put('update-product/{id}', [ProductController::class, 'update']);
+Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
 
 // Route::group(['prefix' => '/users'],
 // function () {
