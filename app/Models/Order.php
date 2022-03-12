@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Client;
 use App\Models\User;
 
-class Call extends Model
+class Order extends Model
 {
     use HasFactory;
     public function clients()

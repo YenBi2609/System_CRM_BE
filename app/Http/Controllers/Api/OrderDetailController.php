@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Call;
+use App\Models\OrderDetail;
 
-class CallController extends Controller
+class OrderDetailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,14 @@ class CallController extends Controller
      */
     public function index()
     {
-        $callList = Call::all();
-        foreach($callList as $call) {
-            $call->clientName = $call->clients->name;
-            $call->userName = $call->users->name;
+        $orderList = OrderDetail::all();
+        foreach($orderList as $order) {
+            $order->orderName = $order->orders->status;
+            $order->productName = $order->products->name;
         }
         return [
             'status'     => "200",
-            'listObject' => $callList
+            'listObject' => $orderList
         ];
     }
 
@@ -34,17 +34,18 @@ class CallController extends Controller
      */
     public function store(Request $request)
     {
-        $call              = new Call();
-        $call->idClient        = $request->idClient;
-        $call->date      = $request->date;
-        $call->note    = $request->note;
-        $call->idUser    = $request->idUser;
+        $order              = new OrderDetail();
+        $order->idProduct        = $request->idProduct;
+        $order->idOrder      = $request->idOrder;
+        $order->quantity    = $request->quantity;
+        $order->discount    = $request->discount;
+        $order->total    = $request->total;
 
-        if($call->save()) {
+        if($order->save()) {
 
             return [
                 "status" => "200",
-                "data"  => $call
+                "data"  => $order
             ];
         } else {
             return [
@@ -73,12 +74,13 @@ class CallController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $call = Call::find($id);
-        $call->idClient        = $request->idClient;
-        $call->date      = $request->date;
-        $call->note    = $request->note;
-        $call->idUser    = $request->idUser;
-        if($call->save()) {
+        $order = OrderDetail::find($id);
+        $order->idProduct        = $request->idProduct;
+        $order->idOrder      = $request->idOrder;
+        $order->quantity    = $request->quantity;
+        $order->discount    = $request->discount;
+        $order->total    = $request->total;
+        if($order->save()) {
             return [
                 "status" => "200"
             ];
@@ -93,7 +95,7 @@ class CallController extends Controller
      */
     public function destroy($id)
     {
-        Call::where('id', '=', $id)->delete();
+        OrderDetail::where('id', '=', $id)->delete();
         return [
             'status' => '200'
         ]; 
