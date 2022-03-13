@@ -26,6 +26,10 @@ use App\Http\Controllers\Api\OrderDetailController;
 // });
 
 // Users
+Route::post('login', [UserController::class, 'login']);
+
+
+// Users
 Route::get('users', [UserController::class, 'index']);
 Route::post('create/users', [UserController::class, 'store']);
 Route::put('update-user/{id}', [UserController::class, 'update']);

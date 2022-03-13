@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Jobs\SendEmail;
+use Auth;
 
 class UserController extends Controller
 {
@@ -15,8 +17,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        // $post = User::get();
-        // return json_encode($post);
         $user_list = User::all();
         return (["response" => $user_list, "status" => "200 OK"]);
     }
@@ -37,6 +37,17 @@ class UserController extends Controller
         $user->password       = $request->password;
         $user->role       = $request->role;
         if($user->save()) {
+            // $mail = $user->email;
+            // $message = [
+            //     'type' => 'Create account',
+            //     'task' => $user->name,
+            //     'content' => 'has been created!',
+            // ];
+            // SendEmail::dispatch($message, $mail)->delay(now()->addMinute(1));
+            // return [
+            //     "status" => "200",
+            //     "email"  => $mail
+            // ];
             return [
                 "status" => "200"
             ];
@@ -88,6 +99,14 @@ class UserController extends Controller
         User::where('id', '=', $id)->delete();
         return [
             'status' => '200'
+        ]; 
+    }
+    public function login(Request $request)
+    {        
+        $user = User::where('email', '=', $request->email)->where('password','=', $request->password)->get();
+        return [
+            'status' => '200',
+            'user' => $user
         ]; 
     }
 }
