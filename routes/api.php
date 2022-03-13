@@ -27,6 +27,9 @@ use App\Http\Controllers\Api\OrderDetailController;
 
 // Users
 Route::get('users', [UserController::class, 'index']);
+Route::post('create/users', [UserController::class, 'store']);
+Route::put('update-user/{id}', [UserController::class, 'update']);
+Route::delete('delete-user/{id}', [UserController::class, 'destroy']);
 
 // Task 
 Route::get('tasks', [TaskController::class, 'index']);

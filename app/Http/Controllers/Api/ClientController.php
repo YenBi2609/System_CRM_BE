@@ -15,8 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $task_list = Client::all();
-        return (["response" => $task_list, "status" => "200 OK"]);//
+        $user_list = Client::all();
+        return (["response" => $user_list, "status" => "200 OK"]);//
     }
 
     /**

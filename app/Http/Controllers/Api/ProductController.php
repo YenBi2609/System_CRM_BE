@@ -15,8 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $task_list = Product::all();
-        return (["response" => $task_list, "status" => "200 OK"]);//
+        $product_list = Product::all();
+        return (["response" => $product_list, "status" => "200 OK"]);
     }
 
     /**
@@ -27,18 +27,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $task              = new Product();
-        $task->name        = $request->name;
-        $task->description      = $request->description;
-        $task->price    = $request->price;
-        $task->cost    = $request->cost;
-        $task->quantity        = $request->quantity;
+        $product              = new Product();
+        $product->name        = $request->name;
+        $product->description      = $request->description;
+        $product->price    = $request->price;
+        $product->cost    = $request->cost;
+        $product->quantity        = $request->quantity;
 
-        if($task->save()) {
+        if($product->save()) {
 
             return [
                 "status" => "200",
-                "email"  => $task
+                "email"  => $product
             ];
         } else {
             return [
@@ -67,13 +67,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Product::find($id);
-        $task->name        = $request->name;
-        $task->description      = $request->description;
-        $task->price    = $request->price;
-        $task->cost    = $request->cost;
-        $task->quantity        = $request->quantity;
-        if($task->save()) {
+        $product = Product::find($id);
+        $product->name        = $request->name;
+        $product->description      = $request->description;
+        $product->price    = $request->price;
+        $product->cost    = $request->cost;
+        $product->quantity        = $request->quantity;
+        if($product->save()) {
             return [
                 "status" => "200"
             ];

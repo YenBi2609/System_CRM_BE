@@ -19,6 +19,7 @@ class CallController extends Controller
         foreach($callList as $call) {
             $call->clientName = $call->clients->name;
             $call->userName = $call->users->name;
+            $call->phoneNumber = $call->clients->phoneNumber;
         }
         return [
             'status'     => "200",

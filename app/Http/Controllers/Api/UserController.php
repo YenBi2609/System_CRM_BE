@@ -29,7 +29,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user              = new User();
+        $user->name  = $request->name;
+        $user->phoneNumber = $request->phoneNumber;
+        $user->address = $request->address;
+        $user->email       = $request->email;
+        $user->password       = $request->password;
+        $user->role       = $request->role;
+        if($user->save()) {
+            return [
+                "status" => "200"
+            ];
+        } 
     }
 
     /**
@@ -52,7 +63,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name  = $request->name;
+        $user->phoneNumber = $request->phoneNumber;
+        $user->address = $request->address;
+        $user->email       = $request->email;
+        $user->password       = $request->password;
+        $user->role       = $request->role;
+        if($user->save()) {
+            return [
+                "status" => "200"
+            ];
+        } 
     }
 
     /**
@@ -63,6 +85,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::where('id', '=', $id)->delete();
+        return [
+            'status' => '200'
+        ]; 
     }
 }
