@@ -32,7 +32,8 @@ class TaskController extends Controller
         $task->status = $request->status;
         $task->priority = $request->priority;
         $task->duration       = $request->duration;
-        $task->date       = $request->date;
+        $task->start_date       = $request->start_date;
+        $task->end_date       = $request->end_date;
         $task->user       = $request->user;
 
         if($task->save()) {
@@ -83,7 +84,8 @@ class TaskController extends Controller
         $task->status = $request->status;
         $task->priority = $request->priority;
         $task->duration       = $request->duration;
-        $task->date       = $request->date;
+        $task->start_date       = $request->start_date;
+        $task->end_date       = $request->end_date;
         $task->user       = $request->user;
         if($task->save()) {
             return [
