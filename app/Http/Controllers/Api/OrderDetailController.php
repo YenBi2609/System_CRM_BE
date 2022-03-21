@@ -62,7 +62,15 @@ class OrderDetailController extends Controller
      */
     public function show($id)
     {
-        //
+        $orderList = OrderDetail::where('idOrder', '=', $id)->get();
+        foreach($orderList as $order) {
+            $order->orderName = $order->orders->status;
+            $order->productName = $order->products->name;
+        }
+        return [
+            'status'     => "200",
+            'listObject' => $orderList
+        ];
     }
 
     /**

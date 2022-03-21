@@ -16,7 +16,11 @@ class TaskController extends Controller
     public function index()
     {
         $task_list = Task::all();
-        return (["response" => $task_list, "status" => "200 OK"]);//
+        foreach($task_list as $task) {
+            $task->userName = $task->users->name;
+        }
+        return (["response" => $task_list, "status" => "200 OK"]);
+
     }
 
     /**
@@ -34,7 +38,7 @@ class TaskController extends Controller
         $task->duration       = $request->duration;
         $task->start_date       = $request->start_date;
         $task->end_date       = $request->end_date;
-        $task->user       = $request->user;
+        $task->idUser       = $request->idUser;
 
         if($task->save()) {
             // $customerEmail = $task->customer->email;
@@ -86,7 +90,7 @@ class TaskController extends Controller
         $task->duration       = $request->duration;
         $task->start_date       = $request->start_date;
         $task->end_date       = $request->end_date;
-        $task->user       = $request->user;
+        $task->idUser       = $request->idUser;
         if($task->save()) {
             return [
                 "status" => "200"
