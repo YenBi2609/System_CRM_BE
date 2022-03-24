@@ -15,8 +15,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $user_list = Client::all();
-        return (["response" => $user_list, "status" => "200 OK"]);//
+        $client_list = Client::all();
+        return (["response" => $client_list, "status" => "200 OK"]);//
     }
 
     /**
@@ -27,17 +27,17 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $task              = new Client();
-        $task->name  = $request->name;
-        $task->phoneNumber = $request->phoneNumber;
-        $task->address = $request->address;
-        $task->email       = $request->email;
+        $client              = new Client();
+        $client->name  = $request->name;
+        $client->phoneNumber = $request->phoneNumber;
+        $client->address = $request->address;
+        $client->email       = $request->email;
 
-        if($task->save()) {
+        if($client->save()) {
 
             return [
                 "status" => "200",
-                "email"  => $task
+                "email"  => $client
             ];
         } else {
             return [
@@ -66,12 +66,12 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Client::find($id);
-        $task->name  = $request->name;
-        $task->phoneNumber = $request->phoneNumber;
-        $task->address = $request->address;
-        $task->email       = $request->email;
-        if($task->save()) {
+        $client = Client::find($id);
+        $client->name  = $request->name;
+        $client->phoneNumber = $request->phoneNumber;
+        $client->address = $request->address;
+        $client->email       = $request->email;
+        if($client->save()) {
             return [
                 "status" => "200"
             ];

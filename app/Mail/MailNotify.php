@@ -31,7 +31,7 @@ class MailNotify extends Mailable
     public function build()
     {
         return $this->from('yenqtdev@gmail.com')
-            ->view('mails.test')
-            ->subject('Notification email');
+            ->view('mails.email_marketing')
+            ->subject('Symper CRM');
     }
 }

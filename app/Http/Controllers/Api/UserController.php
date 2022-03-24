@@ -48,19 +48,9 @@ class UserController extends Controller
         $user->password       = $request->password;
         $user->role       = $request->role;
         if($user->save()) {
-            // $mail = $user->email;
-            // $message = [
-            //     'type' => 'Create account',
-            //     'task' => $user->name,
-            //     'content' => 'has been created!',
-            // ];
-            // SendEmail::dispatch($message, $mail)->delay(now()->addMinute(1));
-            // return [
-            //     "status" => "200",
-            //     "email"  => $mail
-            // ];
             return [
-                "status" => "200"
+                "status" => "200",
+                "data"  => $user
             ];
         } 
     }

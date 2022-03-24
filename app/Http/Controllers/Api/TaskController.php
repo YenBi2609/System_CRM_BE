@@ -41,17 +41,6 @@ class TaskController extends Controller
         $task->idUser       = $request->idUser;
 
         if($task->save()) {
-            // $customerEmail = $task->customer->email;
-            // $productName   = $task->product->name;
-            // $taskduration    = $task->duration;
-            // $message = [
-            //     'type' => 'Register successsfully',
-            //     'content' => 'Welcome to KOURSES, from Team 13 with love <3!',
-            //     'productName' => $productName,
-            //     'taskduration'  => $taskduration
-            // ];
-            // SendEmail::dispatch($message, $customerEmail)->delay(now()->addMinute(1));
-
             return [
                 "status" => "200",
                 "email"  => $task

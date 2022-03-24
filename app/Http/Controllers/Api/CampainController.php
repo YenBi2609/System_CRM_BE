@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Campain;
+use App\Models\Client;
+use App\Jobs\SendEmail;
 
 class CampainController extends Controller
 {
@@ -15,19 +17,15 @@ class CampainController extends Controller
      */
     public function index()
     {
+
         $campain_list = Campain::all();
-            // $mail = 'yenbi2609@gmail.com';
-            // $message = [
-            //     'type' => 'Create account',
-            //     'task' => 'abc',
-            //     'content' => 'has been created!',
-            // ];
-            // SendEmail::dispatch($message, $mail)->delay(now()->addMinute(1));
-            // return [
-            //     "status" => "200",
-            //     "email"  => $mail
-            // ];
-        return (["response" => $campain_list, "status" => "200 OK"]);
+        foreach($campain_list as $campain) {
+            $campain->userName = $campain->users->name;
+        }
+        return [
+            'status'     => "200",
+            'response' => $campain_list
+        ];
     }
 
     /**
@@ -38,23 +36,14 @@ class CampainController extends Controller
      */
     public function store(Request $request)
     {
-        $campain              = new Campain();
+        $campain       = new Campain();
         $campain->name  = $request->name;
         $campain->idUser = $request->idUser;
+        $campain->content = $request->content;
         if($campain->save()) {
-            // $mail = $campain->email;
-            // $message = [
-            //     'type' => 'Create account',
-            //     'task' => $campain->name,
-            //     'content' => 'has been created!',
-            // ];
-            // SendEmail::dispatch($message, $mail)->delay(now()->addMinute(1));
-            // return [
-            //     "status" => "200",
-            //     "email"  => $mail
-            // ];
             return [
-                "status" => "200"
+                "status" => "200",
+                "data"  => $campain
             ];
         } 
     }
@@ -82,6 +71,7 @@ class CampainController extends Controller
         $campain = Campain::find($id);
         $campain->name  = $request->name;
         $campain->idUser = $request->idUser;
+        $campain->content = $request->content;
         if($campain->save()) {
             return [
                 "status" => "200"
@@ -101,5 +91,25 @@ class CampainController extends Controller
         return [
             'status' => '200'
         ]; 
+    }
+    public function sendEmail($id)
+    {
+        $campain = Campain::find($id);
+        $client_list = Client::all();
+        foreach($client_list as $client) {
+            $mail = $client->email;
+            $message = [
+                'content' => $campain->content,
+            ];
+            SendEmail::dispatch($message, $mail)->delay(now()->addMinute(1));
+        }
+
+        $campain->totalEmailSent += count($client_list);
+        if($campain->save()) {
+            return [
+                "status" => "200",
+                'response' => count($client_list)
+            ];
+        } 
     }
 }

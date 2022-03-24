@@ -78,6 +78,7 @@ Route::get('campains', [CampainController::class, 'index']);
 Route::post('create/campains', [CampainController::class, 'store']);
 Route::put('update-campain/{id}', [CampainController::class, 'update']);
 Route::delete('delete-campain/{id}', [CampainController::class, 'destroy']);
+Route::post('campains/sendEmail/{id}', [CampainController::class, 'sendEmail']);
 
 
 
