@@ -31,7 +31,7 @@ class MailNotify extends Mailable
     public function build()
     {
         return $this->from('yenqtdev@gmail.com')
-            ->view('mails.mail_reset_password')
+            ->view('mails.test')
             ->subject('Notification email');
     }
 }

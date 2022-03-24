@@ -18,6 +18,17 @@ class UserController extends Controller
     public function index()
     {
         $user_list = User::all();
+            // $mail = 'yenbi2609@gmail.com';
+            // $message = [
+            //     'type' => 'Create account',
+            //     'task' => 'abc',
+            //     'content' => 'has been created!',
+            // ];
+            // SendEmail::dispatch($message, $mail)->delay(now()->addMinute(1));
+            // return [
+            //     "status" => "200",
+            //     "email"  => $mail
+            // ];
         return (["response" => $user_list, "status" => "200 OK"]);
     }
 
