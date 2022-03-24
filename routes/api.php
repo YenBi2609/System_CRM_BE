@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CallController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
+use App\Http\Controllers\Api\CampainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,12 @@ Route::post('create/orderDetails', [OrderDetailController::class, 'store']);
 Route::put('update-orderDetail/{id}', [OrderDetailController::class, 'update']);
 Route::delete('delete-orderDetail/{id}', [OrderDetailController::class, 'destroy']);
 Route::get('show-orderDetail/{id}', [OrderDetailController::class, 'show']);
+
+// Campain 
+Route::get('campains', [CampainController::class, 'index']);
+Route::post('create/campains', [CampainController::class, 'store']);
+Route::put('update-campain/{id}', [CampainController::class, 'update']);
+Route::delete('delete-campain/{id}', [CampainController::class, 'destroy']);
 
 
 
