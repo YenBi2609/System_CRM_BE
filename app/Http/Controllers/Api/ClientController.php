@@ -37,7 +37,7 @@ class ClientController extends Controller
 
             return [
                 "status" => "200",
-                "email"  => $client
+                "data"  => $client
             ];
         } else {
             return [

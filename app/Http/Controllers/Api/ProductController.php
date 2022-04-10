@@ -38,7 +38,7 @@ class ProductController extends Controller
 
             return [
                 "status" => "200",
-                "email"  => $product
+                "data"  => $product
             ];
         } else {
             return [
